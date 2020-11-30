@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     
     <title>Gestion des employés</title>
-    <link rel="stylesheet" href="static/bootstrap.min.css">
-    <link rel="stylesheet" href="static/font-awesome.css">
+    <link rel="stylesheet" href="/static/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/font-awesome.css">
 </head>
 <body>
 
@@ -31,26 +31,26 @@
 </div>
 
 <div class="container">
-    <h2>Détail du Commercial C00002</h2>
-    
+    <h2>Détail du [[${employe.className}]] [[${employe.matricule}]]</h2>
+    <!--/*@thymesVar id="employe" type="com.ipiecoles.java.java320.model.Employe"*/-->
     <form id="saveForm" action="http://localhost:8080/employes/commercial/6" method="post" class="row">
         <div class="col-lg-6">
             <div class="form-group">
                 <label class="form-control-label" for="nom">Nom</label>
-                <input type="text" value="Poirier" class="form-control" name="nom" id="nom">
+                <input type="text" value="Poirier" th:value="${employe.nom}" class="form-control" name="nom" id="nom">
 
                 <label class="form-control-label" for="prenom">Prénom</label>
-                <input type="text" value="Marie" class="form-control" name="prenom" id="prenom">
+                <input type="text" value="Marie" th:value="${employe.prenom}" class="form-control" name="prenom" id="prenom">
 
                 <label class="form-control-label" for="matricule">Matricule</label>
-                <input type="text" value="C00002" class="form-control" name="matricule" id="matricule">
+                <input type="text" value="C00002" th:value="${employe.matricule}" class="form-control" name="matricule" id="matricule">
             </div>
         </div>
         <div class="col-lg-6">
             <div class="form-group">
                 <label class="form-control-label" for="nom">Salaire</label>
                 <div class="input-group">
-                    <input type="number" value="2404.0" class="form-control" name="salaire" id="salaire">
+                    <input type="number" value="2404.0" th:value="${employe.salaire}" class="form-control" name="salaire" id="salaire">
                     <div class="input-group-append">
                         <span class="input-group-text">€</span>
                     </div>
@@ -59,7 +59,7 @@
                 <div>
                     <label class="form-control-label" for="nom">Prime Annuelle</label>
                     <div class="input-group">
-                        <input type="text" value="500.0" class="form-control" name="primeAnnuelle" id="primeAnnuelle">
+                        <input type="text" value="500.0" th:value="${employe.primeAnnuelle}" class="form-control" name="primeAnnuelle" id="primeAnnuelle">
                         <div class="input-group-append">
                             <span class="input-group-text">€</span>
                         </div>
@@ -67,10 +67,10 @@
                 </div>
 
                 <label class="form-control-label" for="nom">Date d'embauche</label>
-                <input type="text" value="10/01/2011" class="form-control" name="dateEmbauche" id="dateEmbauche">
+                <input type="text" value="10/01/2011" th:value="${employe.dateEmbauche}" class="form-control" name="dateEmbauche" id="dateEmbauche">
             </div>
         </div>
-        <div class="col-lg-6">
+        <!--<div class="col-lg-6">
             <label class="form-control-label" for="performance">Performance</label>
             <input type="number" value="5" class="form-control" name="performance" id="performance">
 
@@ -81,7 +81,7 @@
                     <span class="input-group-text">€</span>
                 </div>
             </div>
-        </div>
+        </div>-->
 
         
 
