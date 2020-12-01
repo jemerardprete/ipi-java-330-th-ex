@@ -1,34 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    
-    <title>Gestion des employé</title>
-    <link rel="stylesheet" href="./static/bootstrap.min.css">
-    <link rel="stylesheet" href="./static/font-awesome.css">
-</head>
+<head th:replace="fragments/header :: head"></head>
 <body>
 
-<div>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="http://localhost:8080/">Gestion des Employés</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li><a href="http://localhost:8080/employes?page=0&amp;size=10&amp;sortProperty=matricule&amp;sortDirection=ASC" class="nav-link">Liste des employés <span class="badge badge-primary" th:text="${nbEmployes}"></span></a></li>
-            </ul>
-
-            <form class="form-inline my-2 my-lg-0" role="search" action="http://localhost:8080/employes" method="GET">
-                <div class="form-group">
-                    <input name="matricule" class="form-control" placeholder="Rechercher un matricule" type="text">
-                </div>
-                <button type="submit" class="btn btn-outline-success ml-2 my-2 my-sm-0">Rechercher</button>
-            </form>
-        </div>
-    </nav>
-</div>
+<div th:replace="fragments/header :: menu"></div>
 
 <div class="container mt-2">
     <div class="jumbotron">

@@ -1,35 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Gestion des employés</title>
-    <link rel="stylesheet" href="/static/bootstrap.min.css">
-    <link rel="stylesheet" href="/static/font-awesome.css">
-    <script src="/webjars/jquery/3.5.1/jquery.min.js" type="application/javascript"></script>
-    <script src="/webjars/bootstrap/4.5.0/js/bootstrap.bundle.min.js" type="application/javascript"></script>
-</head>
+<head th:replace="fragments/header :: head"></head>
 <body>
 
-<div>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="http://localhost:8080/">Gestion des Employés</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li><a href="http://localhost:8080/employes?page=0&amp;size=10&amp;sortProperty=matricule&amp;sortDirection=ASC" class="nav-link">Liste des employés <span th:text="${employes.totalElements}" class="badge badge-primary">2504</span></a></li>
-            </ul>
-
-            <form class="form-inline my-2 my-lg-0" role="search" action="http://localhost:8080/employes" method="GET">
-                <div class="form-group">
-                    <input name="matricule" class="form-control" placeholder="Rechercher un matricule" type="text">
-                </div>
-                <button type="submit" class="btn btn-outline-success ml-2 my-2 my-sm-0">Rechercher</button>
-            </form>
-        </div>
-    </nav>
-</div>
+<div th:replace="fragments/header :: menu"></div>
 
 <div class="container">
     <h2>Liste des employés</h2>
@@ -50,12 +24,13 @@
                 <thead>
                 <tr>
                     <th scope="col">
+                        <!-- Change l'ordre d'affichage des matricules -->
                         <div th:switch="${param.sortDirection.toString()}" th:if="${param.sortProperty.toString()} == 'matricule'">
                             <span th:case="DESC">
                                 Matricule <a href="http://localhost:8080/employes?page=0&amp;size=10&amp;sortDirection=ASC&amp;sortProperty=matricule"><i class="fa fa-chevron-up"></i></a>
                             </span>
                             <span th:case="ASC">
-                                Matricule <a href="http://localhost:8080/employes?page=0&amp;size=10&amp;sortDirection=DESC&amp;sortProperty=matricule"><i class="fa fa-chevron-up"></i></a>
+                                Matricule <a href="http://localhost:8080/employes?page=0&amp;size=10&amp;sortDirection=DESC&amp;sortProperty=matricule"><i class="fa fa-chevron-down"></i></a>
                             </span>
                         </div>
 
@@ -95,14 +70,19 @@
                 <div class="col-lg-6">
                     <nav aria-label="Page navigation example">
                         <ul class="pagination">
-                            <li class="page-item" th:if="${pageNumber} != 1">
+                            <!-- Si une page précédente existe, alors un bouton pour y accéder est affiché -->
+                            <li class="page-item" th:if="${employes.hasPrevious()}">
                                 <a th:href="@{/employes(page=${previousPage},size=${param.size},sortDirection=${param.sortDirection},sortProperty=${param.sortProperty})}" class="page-link">«</a>
                             </li>
+                            <!--<li class="page-item" th:if="${pageNumber} == 1">
+                                <a href="#" class="page-link">«</a>
+                            </li>-->
 
                             <li class="page-item">
                                 <a class="page-link">Page <span th:text="${pageNumber}">1</span></a>
                             </li>
-                            <li class="page-item">
+                            <!-- Si une page suivante existe, alors un bouton pour y accéder est affiché -->
+                            <li class="page-item" th:if="${employes.hasNext()}">
                                 <a class="page-link" th:href="@{/employes(page=${nextPage},size=${param.size},sortDirection=${param.sortDirection},sortProperty=${param.sortProperty})}">
                                     »
                                 </a>
